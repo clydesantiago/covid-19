@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+// import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
 export default {
   mode: 'universal',
@@ -30,6 +31,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/moment',
+    '~/plugins/mixins'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -60,6 +63,9 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
+      icons: {
+        iconfont: 'mdi',
+      },
       dark: true,
       themes: {
         dark: {
