@@ -9,8 +9,13 @@
       <img class="custom-logo" src="~/static/logo.png" alt="Covid-18 Updates">
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn text @click="followLink('https://facebook.com')">
-          Facebook
+        <v-btn text @click="followLink('https://www.who.int/')">
+          WHO
+        </v-btn>
+      </v-toolbar-items>
+      <v-toolbar-items>
+        <v-btn text @click="followLink('https://www.gov.ph/')">
+          DOH
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>

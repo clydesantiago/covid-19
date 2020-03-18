@@ -6,7 +6,7 @@
           align="center">
           <v-col cols="6" offset-sm="3">
             <div class="display-4 font-weight-thin text-center">
-              10:48 AM
+              {{ $moment().format('LT') }}
             </div>
           </v-col>
           <v-col cols="6" offset-sm="3">
@@ -24,31 +24,40 @@
       </v-container>
     </div>
     <v-container grid-list-md>
-      <v-row>
-        <v-col v-for="i in 12" :key="i" cols="4">
+      <v-row v-if="articles.length > 0" >
+        <v-col v-for="(article, index) in articles" :key="index" cols="4">
           <v-card
             class="mx-auto"
             outlined
           >
             <v-list-item three-line>
               <v-list-item-content>
-                <div class="overline mb-4">OVERLINE</div>
-                <v-list-item-title class="headline mb-1">Headline 5</v-list-item-title>
-                <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+                <div class="overline mb-4">{{ article.author }}</div>
+                <v-list-item-title class="headline mb-1">{{ article.source.name }}</v-list-item-title>
+                <v-list-item-subtitle>{{ article.title }}</v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-avatar
                 tile
                 size="80"
                 color="grey"
-              ></v-list-item-avatar>
+              >
+                <v-img :src="article.urlToImage"></v-img>
+              </v-list-item-avatar>
             </v-list-item>
 
             <v-card-actions>
-              <v-btn text>Button</v-btn>
-              <v-btn text>Button</v-btn>
+              <v-btn text @click="followLink(article.url)">View Article</v-btn>
             </v-card-actions>
           </v-card>
+        </v-col>
+      </v-row>
+      <v-row v-else>
+        <v-col v-for="i in 6" :key="i" cols="4">
+          <v-skeleton-loader
+            class="mx-auto"
+            type="card"
+          ></v-skeleton-loader>
         </v-col>
       </v-row>
     </v-container>
@@ -115,10 +124,21 @@
   </div>
 </template>
 <script>
-const apiURL = 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats'
+const covidAPI = 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats'
+const newsAPI = 'http://newsapi.org/v2/everything?q=covid-19&apiKey=c8e6e3d286b7484cb88e71a76ad19872'
 
 export default {
+  mounted () {
+    this.getLatestNews()
+  },
   methods: {
+    getLatestNews () {
+      this.$axios.get(newsAPI)
+        .then((res) => {
+          this.articles = res.data.articles
+          console.log(res.data.articles)
+        })
+    },
     showDialogResult (data) {
       this.result = data
       this.dialog = true
@@ -130,7 +150,7 @@ export default {
 
       this.$axios({
         method: 'GET',
-        url: apiURL,
+        url: covidAPI,
         headers: {
           'content-type': 'application/octet-stream',
           'x-rapidapi-host': 'covid-19-coronavirus-statistics.p.rapidapi.com',
@@ -153,6 +173,7 @@ export default {
   },
   data () {
     return {
+      articles: [],
       result: null,
       dialog: false,
       search: '',
@@ -413,9 +434,6 @@ export default {
 </script>
 <style scoped>
 .main-content {
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.unsplash.com/photo-1486025402772-bc179c8dfb0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
   height: 100vh;
 }
