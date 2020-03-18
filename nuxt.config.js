@@ -1,13 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 // import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
-  router: {
-    base: '/covid-19/'
-  }
-} : {}
 
 export default {
-  ...routerBase,
+  router: {
+    base: '/covid-19/'
+  },
   mode: 'spa',
   /*
   ** Headers of the page
