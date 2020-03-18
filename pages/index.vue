@@ -4,12 +4,12 @@
       <v-container fill-height fluid>
         <v-row
           align="center">
-          <v-col cols="6" offset-sm="3">
+          <v-col cols="12" md="6" offset-md="3">
             <div class="display-4 font-weight-thin text-center">
               {{ $moment().format('LT') }}
             </div>
           </v-col>
-          <v-col cols="6" offset-sm="3">
+          <v-col cols="12" md="6" offset-md="3">
             <v-autocomplete
               :loading="loading"
               v-model="search"
@@ -25,7 +25,7 @@
     </div>
     <v-container grid-list-md>
       <v-row v-if="articles.length > 0" >
-        <v-col v-for="(article, index) in articles" :key="index" cols="4">
+        <v-col v-for="(article, index) in articles" :key="index" cols="12" md="4" sm="6">
           <v-card
             class="mx-auto"
             outlined
