@@ -37,7 +37,7 @@
         class="lighten-2 py-4 text-center white--text"
         cols="12"
       >
-        Data provided by third party API.
+        This is and Open-Source web application. Data provided by third party API.
       </v-col>
       <v-col
         class="lighten-2 py-4 text-center white--text"
