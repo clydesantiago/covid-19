@@ -125,7 +125,7 @@
 </template>
 <script>
 const covidAPI = 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats'
-const newsAPI = 'http://newsapi.org/v2/everything?q=covid-19&apiKey=c8e6e3d286b7484cb88e71a76ad19872'
+const newsAPI = 'https://newsapi.org/v2/everything?q=covid-19&apiKey=c8e6e3d286b7484cb88e71a76ad19872'
 
 export default {
   mounted () {
